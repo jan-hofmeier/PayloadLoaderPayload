@@ -72,13 +72,13 @@ extern "C" uint32_t start_wrapper(int argc, char **argv) {
     std::string payload_path = "wiiu/payloads/default/payload.elf";
 
     uint32_t entryPoint = 0;
-    if((btn & VPAD_BUTTON_B) != VPAD_BUTTON_B){
+    if ((btn & VPAD_BUTTON_B) != VPAD_BUTTON_B) {
         entryPoint = load_loader_elf_from_sd(nullptr, payload_path.c_str());
     }
 
     if (!entryPoint) {
         std::map<std::string, std::string> payloads = get_all_payloads("wiiu/payloads");
-        payload_path = PayloadSelectionScreen(payloads);
+        payload_path                                = PayloadSelectionScreen(payloads);
         DEBUG_FUNCTION_LINE_VERBOSE("Selected %s", payload_path.c_str());
         entryPoint = load_loader_elf_from_sd(nullptr, payload_path.c_str());
     }
